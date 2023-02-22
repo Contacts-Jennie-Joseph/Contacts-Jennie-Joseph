@@ -2,6 +2,8 @@ package contactpackage;
 
 
 import contactpackage.util.Input;
+
+import java.lang.reflect.Array;
 import java.util.Scanner;
 import java.io.IOException;
 import java.nio.file.*;
@@ -14,28 +16,43 @@ public class ContactManager {
     private static Input input = new Input();
 
     public static Contact theContact = null;
+
+    static ArrayList<Contact> contacts = new ArrayList<>();
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        Contact Mary = new Contact("Mary", 912393890);
-        Contact Joey = new Contact("Joey", 837293018);
-        Contact Roy = new Contact("Roy", 873728932);
+        Contact Mary = new Contact("Mary", "9123938970");
+        Contact Joey = new Contact("Joey", "83725930180");
+        Contact Roy = new Contact("Roy", "8737289302");
         System.out.println(Mary);
         System.out.println(Joey);
         System.out.println(Roy);
-        List<String> contactStrings = Arrays.asList(Mary.toFileString(), Joey.toFileString(), Roy.toFileString());
-        Path filepath = Paths.get("data", "contactStringsList.txt");
-        Path dirPath = Paths.get("data");
-        try{
-            Files.createDirectories(dirPath);
-            Files.createFile(filepath);
-            Files.write(filepath, contactStrings);
-        } catch(FileAlreadyExistsException e){
-            System.out.println("the file exists!");
-        } catch(IOException e){
-            System.out.println("File write exception: " + e.getMessage());
-            e.printStackTrace();
-        }
+        contacts.add(Mary);
+        contacts.add(Joey);
+        contacts.add(Roy);
+//        List<String> contactStrings = Arrays.asList(Mary.toFileString(), Joey.toFileString(), Roy.toFileString());
+//        Path filepath = Paths.get("data", "contactStringsList.txt");
+//        Path dirPath = Paths.get("data");
+//        try{
+//            Files.createDirectories(dirPath);
+//            Files.createFile(filepath);
+//            Files.write(filepath, contactStrings);
+//        } catch(FileAlreadyExistsException e){
+//            System.out.println("the file exists!");
+//        } catch(IOException e){
+//            System.out.println("File write exception: " + e.getMessage());
+//            e.printStackTrace();
+//        }
         mainMenu();
+
+//        try {
+//            List<String> allStrings = Files.readAllLines(filepath);
+//            System.out.println(allStrings);
+//
+////            System.out.println(fileStrings.size());
+////            System.out.println(fileStrings);
+//        } catch (IOException e) {
+//            System.out.println("file read exception: " + e.getMessage());
+//        }
 
 // Load all of the contacts by calling a method that returns a List of contactpackage.Contact objects.
 // Call a method that shows the user the main menu and returns their choice of action.
@@ -47,47 +64,60 @@ public class ContactManager {
 
     private static void mainMenu() {
         printWelcome();
-        while(true) {
+        boolean done = true;
+        while(done) {
             // print menu
             printMenu();
-            MenuChoice choice = MenuChoice.fromInt(input.getInt(1, 5, "Enter your choice: "));
+//            MenuChoice choice = MenuChoice.fromInt(input.getInt(1, 5, "Enter your choice: "));
             // process user's choice
+            int choice = input.getInt(1, 5, "Enter your choice: ");
             doChoice(choice);
+//            doChoice(choice);
             // if user quits then break
-            if(MenuChoice.Exit.equals(choice)) {
-                break;
+            if(choice == 5) {
+                done = false;
             }
         }
-        System.out.println("Bye");
+
+//        print out their contact list
+//        System.out.println("Bye");
     }
 
-    private static void doChoice(MenuChoice choice) {
+    private static void doChoice(int choice) {
         switch (choice) {
-            case ViewContacts -> viewContacts();
-            case CreateContact -> theContact = (Contact) createContact();
-            case SearchContacts -> searchContacts();
-            case DeleteContact -> deleteContact();
-            case Exit -> exitContact();
+//            ViewContacts
+            case 1 -> viewContacts();
+//            CreateContact
+            case 2 -> createContact();
+//            SearchContacts
+            case 3 -> searchContacts();
+//            DeleteContact
+            case 4 -> deleteContact();
+//            Exit
         }
-    }
-
-    private static void exitContact() {
     }
 
     private static void deleteContact() {
+
     }
 
     private static void searchContacts() {
+//        user input who's name do they want
+//        if they choice this name then sout it out
+//        for (Contact contact: contacts) {
+//            if (choice.equals contacts)
     }
+
 
     private static void viewContacts() {
-        System.out.println(theContact);
+        System.out.println();
     }
 
-    private static Object createContact() {
+    private static Contact createContact() {
         String name = input.getString("Enter your contact's name: ");
-        int phoneNumber = input.getInt("Enter your contact's phone number: ");
+        String phoneNumber = input.getString("Enter your contact's phone number: ");
         Contact contact = new Contact(name, phoneNumber);
+        System.out.println(contact);
         return contact;
     }
 

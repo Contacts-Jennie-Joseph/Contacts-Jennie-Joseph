@@ -2,7 +2,7 @@ package contactpackage;
 
 public class Contact {
     private String name;
-    private int phoneNumber;
+    private String phoneNumber;
 
 //    constructor
     public Contact(String name) {
@@ -10,18 +10,18 @@ public class Contact {
         phoneNumber = phoneNumber;
     }
 //    constructor
-    public Contact(String name, int phoneNumber){
+    public Contact(String name, String phoneNumber){
         this.name = name;
         this.phoneNumber = phoneNumber;
     }
     public String toFileString() {
-        return String.format("%s,%d", name, phoneNumber);
+        return String.format("%s,%s", name, phoneNumber);
     }
 
     public static Contact fromFileString(String fileString){
         String [] pieces = fileString.split(",");
         Contact contact = new Contact(pieces[0]);
-        contact.setPhoneNumber(Integer.parseInt(pieces[1]));
+        contact.setPhoneNumber(pieces[1]);
         return contact;
     }
 
@@ -41,11 +41,11 @@ public class Contact {
         this.name = name;
     }
 
-    public double getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 }
