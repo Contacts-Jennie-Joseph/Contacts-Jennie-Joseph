@@ -26,19 +26,17 @@ public class ContactManager {
         System.out.println(Mary);
         System.out.println(Joey);
         System.out.println(Roy);
-        List<String> contactStrings = Arrays.asList(Mary.toFileString(), Joey.toFileString(), Roy.toFileString());
-
-
-        try{
-            Files.createDirectories(dirPath);
-            Files.createFile(filepath);
-            Files.write(filepath, contactStrings);
-        } catch(FileAlreadyExistsException e){
-            System.out.println("the file exists!");
-        } catch(IOException e){
-            System.out.println("File write exception: " + e.getMessage());
-            e.printStackTrace();
-        }
+//        List<String> contactStrings = Arrays.asList(Mary.toFileString(), Joey.toFileString(), Roy.toFileString());
+//        try{
+//            Files.createDirectories(dirPath);
+//            Files.createFile(filepath);
+//            Files.write(filepath, contactStrings);
+//        } catch(FileAlreadyExistsException e){
+//            System.out.println("the file exists!");
+//        } catch(IOException e){
+//            System.out.println("File write exception: " + e.getMessage());
+//            e.printStackTrace();
+//        }
 
         contacts.add(Mary);
         contacts.add(Joey);
@@ -58,6 +56,7 @@ public class ContactManager {
 //        }
 
         mainMenu();
+        System.out.println(contacts);
 
 //        try {
 //            List<String> allStrings = Files.readAllLines(filepath);
@@ -126,16 +125,15 @@ public class ContactManager {
 
     }
 
-
-
     private static void viewContacts() {
-        System.out.println();
+        System.out.println(contacts.toString());
     }
 
     private static Contact createContact() {
         String name = input.getString("Enter your contact's name: ");
         String phoneNumber = input.getString("Enter your contact's phone number: ");
         Contact contact = new Contact(name, phoneNumber);
+        contacts.add(contact);
         System.out.println(contact);
         return contact;
     }
