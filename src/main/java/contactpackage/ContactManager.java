@@ -138,12 +138,22 @@ public class ContactManager {
         System.out.println(contacts);
     }
 
-    private static Contact createContact() {
+    private static void createContact() {
+        Contact contact = null;
         String name = input.getString("Enter your contact's name: ");
         String phoneNumber = input.getString("Enter your contact's phone number: ");
-        Contact contact = new Contact(name, phoneNumber);
-        System.out.println(contact);
-        return contact;
+        for (int i = 0; i < contacts.size(); i++) {
+            if (contacts.get(i).getName().equals(name) || contacts.get(i).getPhoneNumber().equals(phoneNumber)) {
+                System.out.println("That contact information already exists");
+                break;
+            } else {
+                contact = new Contact(name, phoneNumber);
+            }
+        }
+        if (contact != null) {
+            contacts.add(contact);
+            System.out.println("You have added " + contact);
+        }
     }
 
     private static void printMenu() {
