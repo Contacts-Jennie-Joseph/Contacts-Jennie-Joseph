@@ -42,21 +42,22 @@ public class Input {
         return anInt;
     }
     public int getInt(){
-        int userInt = 0;
-        try {
-            Integer.valueOf(userInt);
-            System.out.println("Please enter an integer.");
-        }catch (NumberFormatException userInput) {
-            System.out.println("Exception triggered.");
+        String s = getString();
+        int userNum = 0;
+        try{
+            userNum = Integer.valueOf(s);
+        }catch (Exception e){
+            System.out.println("Hey that's not a number!");
+            userNum =  getInt();
         }
-        return sc.nextInt();
+        return userNum;
 
     }
     public double getDouble() {
         double userDouble = 0;
         try{
             Double.valueOf(userDouble);
-            System.out.println("Please enter a double.");
+            System.out.println("Please enter a double: ");
         } catch (NumberFormatException userInput){
             System.out.println("Exception triggered.");
         }
@@ -117,6 +118,9 @@ public class Input {
 
     public Integer getInt(String prompt) {
         System.out.println(prompt);
-        return null;
+        return getInt();
+    }
+    public String nextLine() {
+        return " ";
     }
 } // END CLASS
