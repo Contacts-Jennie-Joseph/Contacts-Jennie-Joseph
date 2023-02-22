@@ -1,3 +1,5 @@
+package contactpackage;
+
 public class Contact {
     private String name;
     private int phoneNumber;
@@ -16,7 +18,7 @@ public class Contact {
         return String.format("%s,%d", name, phoneNumber);
     }
 
-    public static Contact fromFileStirng(String fileString){
+    public static Contact fromFileString(String fileString){
         String [] pieces = fileString.split(",");
         Contact contact = new Contact(pieces[0]);
         contact.setPhoneNumber(Integer.parseInt(pieces[1]));
