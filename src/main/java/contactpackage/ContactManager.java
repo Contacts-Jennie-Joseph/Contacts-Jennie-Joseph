@@ -23,8 +23,8 @@ public class ContactManager {
         System.out.println(Joey);
         System.out.println(Roy);
         List<String> contactStrings = Arrays.asList(Mary.toFileString(), Joey.toFileString(), Roy.toFileString());
-        Path filepath = Paths.get("data", "contactStringsList.txt");
-        Path dirPath = Paths.get("data");
+
+
         try{
             Files.createDirectories(dirPath);
             Files.createFile(filepath);
@@ -78,7 +78,11 @@ public class ContactManager {
     }
 
     private static void searchContacts() {
-    }
+//        user input who's name do they want
+//        if they choice this name then sout it out
+//        for (Contact contact: contacts) {
+//            if (choice.equals contacts)
+
 
     private static void viewContacts() {
         System.out.println(theContact);
