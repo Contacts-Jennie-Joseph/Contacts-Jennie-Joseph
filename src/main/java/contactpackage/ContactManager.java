@@ -1,5 +1,7 @@
 package contactpackage;
 
+
+import contactpackage.util.Input;
 import java.util.Scanner;
 import java.io.IOException;
 import java.nio.file.*;
@@ -7,7 +9,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+
 public class ContactManager {
+    private static Input input = new Input();
+
+    public static Contact theContact = null;
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         Contact Mary = new Contact("Mary", 912393890);
@@ -42,4 +48,54 @@ public class ContactManager {
 
 
     }
+
+    private static void mainMenu() {
+        printWelcome();
+        while(true) {
+            // print menu
+            printMenu();
+            MenuChoice choice = MenuChoice.fromInt(input.getInt(0, 5, "Enter your choice: "));
+            // process user's choice
+            doChoice(choice);
+            // if user quits then break
+            if(MenuChoice.Exit.equals(choice)) {
+                break;
+            }
+        }
+        System.out.println("Bye");
+    }
+
+    private static void doChoice(MenuChoice choice) {
+        switch (choice) {
+            case SearchContacts -> searchContacts();
+            case ViewContacts -> viewContacts();
+            case CreateContact -> theContact = (Contact) createContact();
+            case DeleteContact -> deleteContact();
+        }
+    }
+
+    private static void deleteContact() {
+    }
+
+    private static void searchContacts() {
+    }
+
+    private static void viewContacts() {
+        System.out.println(theContact);
+    }
+
+    private static Object createContact() {
+        String name = input.getString("Enter your contact's name: ");
+        String phoneNumber = input.getString("Enter your contact's phone number: ");
+        Contact contact = new Contact(name, phoneNumber);
+        return contact;
+    }
+
+    private static void printMenu() {
+    }
+
+    private static void printWelcome() {
+        System.out.println("Welcome to your Contacts Manager");
+    }
 }
+
