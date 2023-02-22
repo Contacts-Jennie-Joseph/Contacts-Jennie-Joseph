@@ -5,6 +5,10 @@ import contactpackage.util.Input;
 
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.IOException;
+import java.nio.file.*;
+import java.util.Arrays;
+import java.util.List;
 
 
 public class ContactManager {
@@ -15,51 +19,55 @@ public class ContactManager {
     static ArrayList<Contact> contacts = new ArrayList<>();
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        Contact Mary = new Contact("Mary", "9123938970");
-        Contact Joey = new Contact("Joey", "83725930180");
-        Contact Roy = new Contact("Roy", "8737289302");
-        System.out.println(Mary);
-        System.out.println(Joey);
-        System.out.println(Roy);
+//        Contact Mary = new Contact("Mary", "9123938970");
+//        Contact Joey = new Contact("Joey", "83725930180");
+//        Contact Roy = new Contact("Roy", "8737289302");
+//        System.out.println(Mary);
+//        System.out.println(Joey);
+//        System.out.println(Roy);
 //        List<String> contactStrings = Arrays.asList(Mary.toFileString(), Joey.toFileString(), Roy.toFileString());
 
-//        try{
-//            Files.createDirectories(dirPath);
-//            Files.createFile(filepath);
-//            Files.write(filepath, contactStrings);
-//        } catch(FileAlreadyExistsException e){
-//            System.out.println("the file exists!");
-//        } catch(IOException e){
-//            System.out.println("File write exception: " + e.getMessage());
-//            e.printStackTrace();
-//        }
+//        contacts.add(Mary);
+//        contacts.add(Joey);
+//        contacts.add(Roy);
 
-        contacts.add(Mary);
-        contacts.add(Joey);
-        contacts.add(Roy);
-//        List<String> contactStrings = Arrays.asList(Mary.toFileString(), Joey.toFileString(), Roy.toFileString());
-//        Path filepath = Paths.get("data", "contactStringsList.txt");
-//        Path dirPath = Paths.get("data");
-//        try{
-//            Files.createDirectories(dirPath);
-//            Files.createFile(filepath);
-//            Files.write(filepath, contactStrings);
-//        } catch(FileAlreadyExistsException e){
-//            System.out.println("the file exists!");
-//        } catch(IOException e){
-//            System.out.println("File write exception: " + e.getMessage());
-//            e.printStackTrace();
-//        }
-
+        contacts = fetchContacts();
         mainMenu();
         System.out.println(contacts);
+
+//        List<String> contactStrings = Arrays.asList();
+//        for (Contact contact : contacts) {
+//            System.out.println("hey!"-);
+////            contactStrings.add(contact.toFileString());
+//            String wholeContact = contact.toFileString();
+//            contactStrings.add(wholeContact);
+//        }
+
+//        System.out.println(contactStrings);
+
+//        Path dirPath = Paths.get("data");
+//        Path filepath = Paths.get("data", "contactStringsList.txt");
+//        try{
+//            Files.createDirectories(dirPath);
+//            Files.createFile(filepath);
+//            Files.write(filepath, contactStrings);
+//        } catch(FileAlreadyExistsException e){
+//            System.out.println("the file exists!");
+//        } catch(IOException e){
+//            System.out.println("File write exception: " + e.getMessage());
+//            e.printStackTrace();
+//        }
+//
+
+//        for (string filestring: filestrings) {
+//            fighter aFighter = fighter.fromFileString(filestring);
+//        }
+//        add it to an array list and then return that list
 
 //        try {
 //            List<String> allStrings = Files.readAllLines(filepath);
 //            System.out.println(allStrings);
 //
-////            System.out.println(fileStrings.size());
-////            System.out.println(fileStrings);
 //        } catch (IOException e) {
 //            System.out.println("file read exception: " + e.getMessage());
 //        }
@@ -70,6 +78,15 @@ public class ContactManager {
 // Keep calling the method from step two until the user chooses to exit.
 // Once the user chooses to exit, re-write the contents of the contacts.txt file using the List of contactpackage.Contact objects.
 
+    }
+
+    private static ArrayList<Contact> fetchContacts() {
+        // 1. make an empty contact array list
+//        make a path object to the context file
+//        get the strings from the contact file
+//        for each string make a contact object
+//              add that contact object to the array list
+//        return the array list
     }
 
     private static void mainMenu() {
@@ -109,7 +126,6 @@ public class ContactManager {
 
     private static void deleteContact() {
         String searchedContact = input.getString("Enter contact to delete: ");
-
         Contact foundYou = null;
         for (int i = 0; i < contacts.size(); i++) {
             if (contacts.get(i).getName().equals(searchedContact)) {
