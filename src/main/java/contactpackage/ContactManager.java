@@ -3,13 +3,8 @@ package contactpackage;
 
 import contactpackage.util.Input;
 
-import java.lang.reflect.Array;
 import java.util.Scanner;
-import java.io.IOException;
-import java.nio.file.*;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 
 public class ContactManager {
@@ -27,6 +22,7 @@ public class ContactManager {
         System.out.println(Joey);
         System.out.println(Roy);
 //        List<String> contactStrings = Arrays.asList(Mary.toFileString(), Joey.toFileString(), Roy.toFileString());
+
 //        try{
 //            Files.createDirectories(dirPath);
 //            Files.createFile(filepath);
@@ -111,8 +107,15 @@ public class ContactManager {
         }
     }
 
-    private static void deleteContact() {
-
+    private static ArrayList<Contact> deleteContact() {
+        String searchedContact = input.getString("Enter contact to delete: ");
+        for (Contact contact : contacts) {
+            if (contact.getName().equals(searchedContact)) {
+                contacts.remove(searchedContact);
+                System.out.println("You have deleted this contact.");
+            }
+        }
+        return contacts;
     }
 
     private static void searchContacts() {
@@ -120,13 +123,18 @@ public class ContactManager {
 //        if they choice this name then sout it out
 //        for (Contact contact: contacts) {
 //            if (choice.equals contacts)
-
-
-
+        String searchedContact = input.getString("Enter contact to search for: ");
+        for (Contact contact : contacts) {
+            if (contact.getName().equals(searchedContact)) {
+                System.out.println(contact);
+            }
+        }
     }
 
     private static void viewContacts() {
+
         System.out.println(contacts.toString());
+
     }
 
     private static Contact createContact() {
