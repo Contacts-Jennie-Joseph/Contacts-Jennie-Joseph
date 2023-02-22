@@ -111,7 +111,7 @@ public class ContactManager {
         String searchedContact = input.getString("Enter contact to delete: ");
         for (Contact contact : contacts) {
             if (contact.getName().equals(searchedContact)) {
-                contacts.remove(searchedContact);
+
                 System.out.println("You have deleted this contact.");
             }
         }
@@ -123,6 +123,7 @@ public class ContactManager {
 //        if they choice this name then sout it out
 //        for (Contact contact: contacts) {
 //            if (choice.equals contacts)
+        System.out.println(contacts.toString());
         String searchedContact = input.getString("Enter contact to search for: ");
         for (Contact contact : contacts) {
             if (contact.getName().equals(searchedContact)) {
@@ -132,7 +133,6 @@ public class ContactManager {
     }
 
     private static void viewContacts() {
-
         System.out.println(contacts.toString());
 
     }
