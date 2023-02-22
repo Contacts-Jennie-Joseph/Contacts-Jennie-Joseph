@@ -41,7 +41,7 @@ public class Contact {
         this.name = name;
     }
 
-    public int getPhoneNumber() {
+    public double getPhoneNumber() {
         return phoneNumber;
     }
 
