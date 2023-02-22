@@ -26,6 +26,20 @@ public class ContactManager {
         System.out.println(Mary);
         System.out.println(Joey);
         System.out.println(Roy);
+        List<String> contactStrings = Arrays.asList(Mary.toFileString(), Joey.toFileString(), Roy.toFileString());
+
+
+        try{
+            Files.createDirectories(dirPath);
+            Files.createFile(filepath);
+            Files.write(filepath, contactStrings);
+        } catch(FileAlreadyExistsException e){
+            System.out.println("the file exists!");
+        } catch(IOException e){
+            System.out.println("File write exception: " + e.getMessage());
+            e.printStackTrace();
+        }
+
         contacts.add(Mary);
         contacts.add(Joey);
         contacts.add(Roy);
@@ -42,6 +56,7 @@ public class ContactManager {
 //            System.out.println("File write exception: " + e.getMessage());
 //            e.printStackTrace();
 //        }
+
         mainMenu();
 
 //        try {
@@ -106,7 +121,11 @@ public class ContactManager {
 //        if they choice this name then sout it out
 //        for (Contact contact: contacts) {
 //            if (choice.equals contacts)
+
+
+
     }
+
 
 
     private static void viewContacts() {
