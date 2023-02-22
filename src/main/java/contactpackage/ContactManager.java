@@ -22,8 +22,7 @@ public class ContactManager {
         System.out.println(Joey);
         System.out.println(Roy);
 //        List<String> contactStrings = Arrays.asList(Mary.toFileString(), Joey.toFileString(), Roy.toFileString());
-//
-//
+
 //        try{
 //            Files.createDirectories(dirPath);
 //            Files.createFile(filepath);
@@ -53,6 +52,7 @@ public class ContactManager {
 //        }
 
         mainMenu();
+        System.out.println(contacts);
 
 //        try {
 //            List<String> allStrings = Files.readAllLines(filepath);
@@ -109,10 +109,12 @@ public class ContactManager {
 
     private static void deleteContact() {
         String searchedContact = input.getString("Enter contact to delete: ");
+
         Contact foundYou = null;
         for (int i = 0; i < contacts.size(); i++) {
             if (contacts.get(i).getName().equals(searchedContact)) {
                 foundYou = contacts.get(i);
+
             }
         }
         if (foundYou != null) {
@@ -126,6 +128,7 @@ public class ContactManager {
 //        if they choice this name then sout it out
 //        for (Contact contact: contacts) {
 //            if (choice.equals contacts)
+        System.out.println(contacts.toString());
         String searchedContact = input.getString("Enter contact to search for: ");
         for (Contact contact : contacts) {
             if (contact.getName().equals(searchedContact)) {
@@ -135,13 +138,15 @@ public class ContactManager {
     }
 
     private static void viewContacts() {
-        System.out.println(contacts);
+        System.out.println(contacts.toString());
+
     }
 
     private static Contact createContact() {
         String name = input.getString("Enter your contact's name: ");
         String phoneNumber = input.getString("Enter your contact's phone number: ");
         Contact contact = new Contact(name, phoneNumber);
+        contacts.add(contact);
         System.out.println(contact);
         return contact;
     }
