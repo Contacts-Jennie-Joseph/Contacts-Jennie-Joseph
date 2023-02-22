@@ -107,15 +107,20 @@ public class ContactManager {
         }
     }
 
-    private static ArrayList<Contact> deleteContact() {
+    private static void deleteContact() {
         String searchedContact = input.getString("Enter contact to delete: ");
-        for (Contact contact : contacts) {
-            if (contact.getName().equals(searchedContact)) {
 
-                System.out.println("You have deleted this contact.");
+        Contact foundYou = null;
+        for (int i = 0; i < contacts.size(); i++) {
+            if (contacts.get(i).getName().equals(searchedContact)) {
+                foundYou = contacts.get(i);
+
             }
         }
-        return contacts;
+        if (foundYou != null) {
+            contacts.remove(foundYou);
+            System.out.println("You have deleted this contact.");
+        }
     }
 
     private static void searchContacts() {
