@@ -3,6 +3,7 @@ package contactpackage;
 
 import contactpackage.util.Input;
 
+import java.lang.reflect.Array;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.IOException;
@@ -18,76 +19,91 @@ public class ContactManager {
 
     static ArrayList<Contact> contacts = new ArrayList<>();
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
-//        Contact Mary = new Contact("Mary", "9123938970");
-//        Contact Joey = new Contact("Joey", "83725930180");
-//        Contact Roy = new Contact("Roy", "8737289302");
-//        System.out.println(Mary);
-//        System.out.println(Joey);
-//        System.out.println(Roy);
+        Input input = new Input();
+        Contact Mary = new Contact("Mary", "9123938970");
+        Contact Joey = new Contact("Joey", "83725930180");
+        Contact Roy = new Contact("Roy", "8737289302");
+        System.out.println(Mary);
+        System.out.println(Joey);
+        System.out.println(Roy);
 //        List<String> contactStrings = Arrays.asList(Mary.toFileString(), Joey.toFileString(), Roy.toFileString());
 
-//        contacts.add(Mary);
-//        contacts.add(Joey);
-//        contacts.add(Roy);
+        contacts.add(Mary);
+        contacts.add(Joey);
+        contacts.add(Roy);
 
-        contacts = fetchContacts();
+//        contacts = fetchContacts();
         mainMenu();
         System.out.println(contacts);
 
 //        List<String> contactStrings = Arrays.asList();
+//
 //        for (Contact contact : contacts) {
-//            System.out.println("hey!"-);
-////            contactStrings.add(contact.toFileString());
+////            System.out.println("hey!");
 //            String wholeContact = contact.toFileString();
 //            contactStrings.add(wholeContact);
 //        }
 
-//        System.out.println(contactStrings);
 
-//        Path dirPath = Paths.get("data");
-//        Path filepath = Paths.get("data", "contactStringsList.txt");
-//        try{
-//            Files.createDirectories(dirPath);
-//            Files.createFile(filepath);
-//            Files.write(filepath, contactStrings);
-//        } catch(FileAlreadyExistsException e){
-//            System.out.println("the file exists!");
-//        } catch(IOException e){
-//            System.out.println("File write exception: " + e.getMessage());
-//            e.printStackTrace();
-//        }
-//
+        writeFigthersToFile(contacts);
+    }
+    private static void writeFigthersToFile(ArrayList<Contact> contracts){
+        Path dirPath = Paths.get("data");
+        Path filepath = Paths.get("data", "contactStringsList.txt");
+        try{
+            Files.createDirectories(dirPath);
+            Files.createFile(filepath);
 
-//        for (string filestring: filestrings) {
-//            fighter aFighter = fighter.fromFileString(filestring);
-//        }
-//        add it to an array list and then return that list
+        } catch(FileAlreadyExistsException e){
+            System.out.println("the file exists!");
+        } catch(IOException e){
+            System.out.println("File write exception: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        ArrayList<String> contactStrings = new ArrayList<>();
+//        ArrayList<string> fileStrings = new ArrayList<>();
+//        1. for each fighter,
+//                  add that's string version to a list of strings
+        for (Contact contact : contacts) {
+            String wholeContact = contact.toFileString();
+            contactStrings.add(wholeContact);
+        }
+//        2. get the path object for the file
+//        3.write whole list of strings to the file
+        try{
+            Files.write(filepath, contactStrings);
+        }catch (IOException e){
+            System.out.println("File write exception: " + e.getMessage());
+        }
 
 //        try {
 //            List<String> allStrings = Files.readAllLines(filepath);
 //            System.out.println(allStrings);
-//
 //        } catch (IOException e) {
 //            System.out.println("file read exception: " + e.getMessage());
 //        }
 
-// Load all of the contacts by calling a method that returns a List of contactpackage.Contact objects.
-// Call a method that shows the user the main menu and returns their choice of action.
-// Using the user's choice from the previous step, call a method that performs that action (modifying the contents of the List of contactpackage.Contact objects if applicable).
-// Keep calling the method from step two until the user chooses to exit.
-// Once the user chooses to exit, re-write the contents of the contacts.txt file using the List of contactpackage.Contact objects.
-
     }
 
-    private static ArrayList<Contact> fetchContacts() {
-        // 1. make an empty contact array list
-//        make a path object to the context file
-//        get the strings from the contact file
-//        for each string make a contact object
-//              add that contact object to the array list
-//        return the array list
-    }
+    //        for (string filestring: filestrings) {
+//            fighter aFighter = fighter.fromFileString(filestring);
+//        }
+//        add it to an array list and then return that list
+
+//    private static ArrayList<Contact> fetchContacts() {
+//        // 1. make an empty contact array list
+//        ArrayList<Contact> contactsArray = new ArrayList<>();
+////        make a path object to the context file
+//
+////        get the strings from the contact file
+////        for each string make a contact object
+////              add that contact object to the array list
+////        return the array list
+//    }
+
+
+
 
     private static void mainMenu() {
         printWelcome();
@@ -161,6 +177,7 @@ public class ContactManager {
     private static Contact createContact() {
         String name = input.getString("Enter your contact's name: ");
         String phoneNumber = input.getString("Enter your contact's phone number: ");
+
         Contact contact = new Contact(name, phoneNumber);
         contacts.add(contact);
         System.out.println(contact);
