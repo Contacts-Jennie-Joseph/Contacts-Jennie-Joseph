@@ -36,18 +36,16 @@ public class ContactManager {
     public static void main(String[] args) {
         Input input = new Input();
         Contact Mary = new Contact("Mary", "9123938970");
-        Contact Joey = new Contact("Joey", "83725930180");
+        Contact Joey = new Contact("Joey", "8372593018");
         Contact Roy = new Contact("Roy", "8737289302");
-        System.out.println(Mary);
-        System.out.println(Joey);
-        System.out.println(Roy);
         contacts.add(Mary);
         contacts.add(Joey);
         contacts.add(Roy);
 
 //        contacts = fetchContacts();
         mainMenu();
-        System.out.println(contacts);
+//        System.out.println(contacts);
+
 
         writeContractsToFile(contacts);
     }
@@ -59,7 +57,7 @@ public class ContactManager {
             Files.createDirectories(dirPath);
             Files.createFile(filepath);
         } catch (FileAlreadyExistsException e) {
-            System.out.println("the file exists!");
+//            System.out.println("the file exists!");
         } catch (IOException e) {
             System.out.println("File write exception: " + e.getMessage());
             e.printStackTrace();
@@ -163,7 +161,11 @@ public class ContactManager {
     }
 
     private static void viewContacts() {
-        System.out.println(contacts.toString());
+        System.out.println("  Name   | Phone Number\n" +
+                "-------- | ----------");
+        for (int i = 0; i < contacts.size(); i++) {
+            System.out.println(contacts.get(i));
+        }
     }
 
     private static void createContact() {
