@@ -174,14 +174,25 @@ public class ContactManager {
 
     }
 
-    private static Contact createContact() {
+    private static void createContact() {
+        Contact contact = null;
         String name = input.getString("Enter your contact's name: ");
         String phoneNumber = input.getString("Enter your contact's phone number: ");
 
-        Contact contact = new Contact(name, phoneNumber);
-        contacts.add(contact);
-        System.out.println(contact);
-        return contact;
+
+        for (int i = 0; i < contacts.size(); i++) {
+            if (contacts.get(i).getName().equals(name) || contacts.get(i).getPhoneNumber().equals(phoneNumber)) {
+                System.out.println("That contact information already exists");
+                createContact();
+            } else {
+                contact = new Contact(name, phoneNumber);
+            }
+        }
+        if (contact != null) {
+            contacts.add(contact);
+            System.out.println("You have added " + contact);
+        }
+
     }
 
     private static void printMenu() {
