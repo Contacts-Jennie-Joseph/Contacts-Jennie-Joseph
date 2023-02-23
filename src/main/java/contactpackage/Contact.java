@@ -12,7 +12,7 @@ public class Contact {
 //    constructor
     public Contact(String name, String phoneNumber){
         this.name = name;
-        this.phoneNumber = phoneNumber;
+        this.phoneNumber = phoneNumber.replaceFirst("(\\d{3})(\\d{3})(\\d+)", "($1) $2-$3");
     }
     public String toFileString() {
         return String.format("%s,%s", name, phoneNumber);
@@ -27,9 +27,16 @@ public class Contact {
 
     @Override
     public String toString() {
-        return "" +
-                "Name = '" + name + '\'' +
-                ", PhoneNumber = " + phoneNumber;
+
+        return
+//                "" +
+//                "Name = '" + name + '\'' +
+//                ", PhoneNumber = " + phoneNumber;
+        """
+                Name   | Phone Number
+              -------- | ----------
+              %-8d | %-10d""", name, phoneNumber);
+
     }
 
     public String getName() {

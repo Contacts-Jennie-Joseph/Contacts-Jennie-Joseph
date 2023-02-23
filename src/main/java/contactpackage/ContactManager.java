@@ -183,7 +183,10 @@ public class ContactManager {
         for (int i = 0; i < contacts.size(); i++) {
             if (contacts.get(i).getName().equals(name) || contacts.get(i).getPhoneNumber().equals(phoneNumber)) {
                 System.out.println("That contact information already exists");
-                createContact();
+                break;
+            } else if (phoneNumber.length() != 10) {
+                System.out.println("Phone number must be 10 digits long.");
+                break;
             } else {
                 contact = new Contact(name, phoneNumber);
             }
