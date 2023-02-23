@@ -32,6 +32,7 @@ public class ContactManager {
     public static Contact theContact = null;
 
     static ArrayList<Contact> contacts = new ArrayList<>();
+
     public static void main(String[] args) {
         Input input = new Input();
         Contact Mary = new Contact("Mary", "9123938970");
@@ -50,15 +51,16 @@ public class ContactManager {
 
         writeContractsToFile(contacts);
     }
-    private static void writeContractsToFile(ArrayList<Contact> contracts){
+
+    private static void writeContractsToFile(ArrayList<Contact> contracts) {
         Path dirPath = Paths.get("data");
         Path filepath = Paths.get("data", "contactStringsList.txt");
-        try{
+        try {
             Files.createDirectories(dirPath);
             Files.createFile(filepath);
-        } catch(FileAlreadyExistsException e){
+        } catch (FileAlreadyExistsException e) {
             System.out.println("the file exists!");
-        } catch(IOException e){
+        } catch (IOException e) {
             System.out.println("File write exception: " + e.getMessage());
             e.printStackTrace();
         }
@@ -73,9 +75,9 @@ public class ContactManager {
         }
 //        2. get the path object for the file
 //        3.write whole list of strings to the file
-        try{
+        try {
             Files.write(filepath, contactStrings);
-        }catch (IOException e){
+        } catch (IOException e) {
             System.out.println("File write exception: " + e.getMessage());
         }
 
@@ -107,7 +109,7 @@ public class ContactManager {
     private static void mainMenu() {
         printWelcome();
         boolean done = true;
-        while(done) {
+        while (done) {
             // print menu
             printMenu();
 //            MenuChoice choice = MenuChoice.fromInt(input.getInt(1, 5, "Enter your choice: "));
@@ -116,7 +118,7 @@ public class ContactManager {
             doChoice(choice);
 //            doChoice(choice);
             // if user quits then break
-            if(choice == 5) {
+            if (choice == 5) {
                 done = false;
             }
         }
@@ -135,6 +137,7 @@ public class ContactManager {
 //            Exit
         }
     }
+
     private static void deleteContact() {
         String searchedContact = input.getString("Enter contact to delete: ");
         Contact foundYou = null;
@@ -148,6 +151,7 @@ public class ContactManager {
             System.out.println("You have deleted this contact.");
         }
     }
+
     private static void searchContacts() {
         System.out.println(contacts.toString());
         String searchedContact = input.getString("Enter contact to search for: ");
@@ -157,6 +161,7 @@ public class ContactManager {
             }
         }
     }
+
     private static void viewContacts() {
         System.out.println(contacts.toString());
     }
@@ -167,17 +172,9 @@ public class ContactManager {
         for (int i = 0; i < contacts.size(); i++) {
             if (contacts.get(i).getName().equals(name) || contacts.get(i).getPhoneNumber().equals(phoneNumber)) {
                 System.out.println("That contact information already exists");
-                break;
-            } else if (phoneNumber.length() != 10) {
-                System.out.println("Phone number must be 10 digits long.");
-                break;
-            } else {
-                contact = new Contact(name, phoneNumber);
-
-                System.out.println("hey you got here");
+                getNumber(phoneNumber);
                 createContact();
                 return;
-
             }
         }
         Contact contact = new Contact(name, phoneNumber);
@@ -199,5 +196,10 @@ public class ContactManager {
     private static void printWelcome() {
         System.out.println("Welcome to your Contacts Manager");
     }
-}
 
+    private static void getNumber(String phoneNumber) {
+        if (phoneNumber.length() != 10) {
+            System.out.println("Phone number must be 10 digits long.");
+        }
+    }
+}
