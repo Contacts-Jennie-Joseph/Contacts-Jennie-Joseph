@@ -145,7 +145,7 @@ public class ContactManager {
         for (int i = 0; i < contacts.size(); i++) {
             if (contacts.get(i).getName().equals(name) || contacts.get(i).getPhoneNumber().equals(phoneNumber)) {
                 System.out.println("That contact information already exists");
-                break;
+                createContact();
             } else {
                 contact = new Contact(name, phoneNumber);
             }
