@@ -18,25 +18,17 @@ public class Contact {
         return String.format("%s,%s", name, phoneNumber);
     }
 
+    @Override
+    public String toString() {
+        return String.format("""
+              %-8s | %-10s\n""", name, phoneNumber);
+    }
+
     public static Contact fromFileString(String fileString){
         String [] pieces = fileString.split(",");
         Contact contact = new Contact(pieces[0]);
         contact.setPhoneNumber(pieces[1]);
         return contact;
-    }
-
-    @Override
-    public String toString() {
-
-        return
-//                "" +
-//                "Name = '" + name + '\'' +
-//                ", PhoneNumber = " + phoneNumber;
-        """
-                Name   | Phone Number
-              -------- | ----------
-              %-8d | %-10d""", name, phoneNumber);
-
     }
 
     public String getName() {
