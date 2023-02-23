@@ -3,16 +3,30 @@ package contactpackage;
 
 import contactpackage.util.Input;
 
-import java.lang.reflect.Array;
-import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.IOException;
 import java.nio.file.*;
-import java.util.Arrays;
 import java.util.List;
 
 
 public class ContactManager {
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_BLACK = "\u001B[30m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_PURPLE = "\u001B[35m";
+    public static final String ANSI_CYAN = "\u001B[36m";
+    public static final String ANSI_WHITE = "\u001B[37m";
+    public static final String ANSI_BLACK_BACKGROUND = "\u001B[40m";
+    public static final String ANSI_RED_BACKGROUND = "\u001B[41m";
+    public static final String ANSI_GREEN_BACKGROUND = "\u001B[42m";
+    public static final String ANSI_YELLOW_BACKGROUND = "\u001B[43m";
+    public static final String ANSI_BLUE_BACKGROUND = "\u001B[44m";
+    public static final String ANSI_PURPLE_BACKGROUND = "\u001B[45m";
+    public static final String ANSI_CYAN_BACKGROUND = "\u001B[46m";
+    public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
     private static Input input = new Input();
 
     public static Contact theContact = null;
@@ -26,8 +40,6 @@ public class ContactManager {
         System.out.println(Mary);
         System.out.println(Joey);
         System.out.println(Roy);
-//        List<String> contactStrings = Arrays.asList(Mary.toFileString(), Joey.toFileString(), Roy.toFileString());
-
         contacts.add(Mary);
         contacts.add(Joey);
         contacts.add(Roy);
@@ -36,24 +48,14 @@ public class ContactManager {
         mainMenu();
         System.out.println(contacts);
 
-//        List<String> contactStrings = Arrays.asList();
-//
-//        for (Contact contact : contacts) {
-////            System.out.println("hey!");
-//            String wholeContact = contact.toFileString();
-//            contactStrings.add(wholeContact);
-//        }
-
-
-        writeFigthersToFile(contacts);
+        writeContractsToFile(contacts);
     }
-    private static void writeFigthersToFile(ArrayList<Contact> contracts){
+    private static void writeContractsToFile(ArrayList<Contact> contracts){
         Path dirPath = Paths.get("data");
         Path filepath = Paths.get("data", "contactStringsList.txt");
         try{
             Files.createDirectories(dirPath);
             Files.createFile(filepath);
-
         } catch(FileAlreadyExistsException e){
             System.out.println("the file exists!");
         } catch(IOException e){
@@ -77,12 +79,12 @@ public class ContactManager {
             System.out.println("File write exception: " + e.getMessage());
         }
 
-//        try {
-//            List<String> allStrings = Files.readAllLines(filepath);
-//            System.out.println(allStrings);
-//        } catch (IOException e) {
-//            System.out.println("file read exception: " + e.getMessage());
-//        }
+        try {
+            List<String> allStrings = Files.readAllLines(filepath);
+            System.out.println(ANSI_PURPLE + allStrings + ANSI_RESET);
+        } catch (IOException e) {
+            System.out.println("file read exception: " + e.getMessage());
+        }
 
     }
 
@@ -102,9 +104,6 @@ public class ContactManager {
 ////        return the array list
 //    }
 
-
-
-
     private static void mainMenu() {
         printWelcome();
         boolean done = true;
@@ -121,9 +120,6 @@ public class ContactManager {
                 done = false;
             }
         }
-
-//        print out their contact list
-//        System.out.println("Bye");
     }
 
     private static void doChoice(int choice) {
@@ -139,14 +135,12 @@ public class ContactManager {
 //            Exit
         }
     }
-
     private static void deleteContact() {
         String searchedContact = input.getString("Enter contact to delete: ");
         Contact foundYou = null;
         for (int i = 0; i < contacts.size(); i++) {
             if (contacts.get(i).getName().equals(searchedContact)) {
                 foundYou = contacts.get(i);
-
             }
         }
         if (foundYou != null) {
@@ -154,12 +148,7 @@ public class ContactManager {
             System.out.println("You have deleted this contact.");
         }
     }
-
     private static void searchContacts() {
-//        user input who's name do they want
-//        if they choice this name then sout it out
-//        for (Contact contact: contacts) {
-//            if (choice.equals contacts)
         System.out.println(contacts.toString());
         String searchedContact = input.getString("Enter contact to search for: ");
         for (Contact contact : contacts) {
@@ -168,30 +157,24 @@ public class ContactManager {
             }
         }
     }
-
     private static void viewContacts() {
         System.out.println(contacts.toString());
-
     }
 
     private static void createContact() {
-        Contact contact = null;
         String name = input.getString("Enter your contact's name: ");
         String phoneNumber = input.getString("Enter your contact's phone number: ");
-
-
         for (int i = 0; i < contacts.size(); i++) {
             if (contacts.get(i).getName().equals(name) || contacts.get(i).getPhoneNumber().equals(phoneNumber)) {
                 System.out.println("That contact information already exists");
+                System.out.println("hey you got here");
                 createContact();
-            } else {
-                contact = new Contact(name, phoneNumber);
+                return;
             }
         }
-        if (contact != null) {
-            contacts.add(contact);
-            System.out.println("You have added " + contact);
-        }
+        Contact contact = new Contact(name, phoneNumber);
+        contacts.add(contact);
+        System.out.println("You have added " + contact);
 
     }
 
